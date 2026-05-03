@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { AlertTriangle, CheckCircle, Activity, Heart, Thermometer, Droplet, Bell, Shield } from 'lucide-react'
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts'
 import toast from 'react-hot-toast'
+import { API_BASE_URL } from '../services/api'
 
 const AnomalyDetection = () => {
   const [anomalies, setAnomalies] = useState([
@@ -58,7 +59,7 @@ const AnomalyDetection = () => {
   useEffect(() => {
     // Fetch actual anomalies from the Flask Backend ML Model
     const fetchAnomalies = () => {
-      fetch('http://localhost:5000/api/anomalies')
+      fetch(`${API_BASE_URL}/anomalies`)
         .then(res => res.json())
         .then(data => {
           if (data.success && data.anomalies) {

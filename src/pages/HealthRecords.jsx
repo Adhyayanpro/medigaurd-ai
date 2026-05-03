@@ -2,6 +2,7 @@ import { useState, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { FileText, Download, Calendar, Upload, File, MoreVertical, FileArchive, CheckCircle, Shield, Sparkles } from 'lucide-react'
 import toast from 'react-hot-toast'
+import { API_BASE_URL } from '../services/api'
 
 const HealthRecords = () => {
   const [records, setRecords] = useState([])
@@ -20,7 +21,7 @@ const HealthRecords = () => {
       const base64String = reader.result
 
       // Send to backend for Gemini AI analysis
-      fetch('http://localhost:5000/api/analyze-record', {
+      fetch(`${API_BASE_URL}/analyze-record`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

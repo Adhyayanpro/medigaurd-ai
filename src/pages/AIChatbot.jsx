@@ -41,7 +41,7 @@ const AIChatbot = () => {
       const response = await chatWithAI(text, sessionId, getHealthContext())
       setMessages(prev => [...prev, { id: prev.length + 1, text: response.response || "I couldn't process that. Please try again.", sender: 'bot', timestamp: new Date() }])
     } catch {
-      setMessages(prev => [...prev, { id: prev.length + 1, text: "Unable to connect. Make sure the backend is running on localhost:5000.", sender: 'bot', timestamp: new Date() }])
+      setMessages(prev => [...prev, { id: prev.length + 1, text: "Unable to connect to the MediGuard backend. Please check that the API URL is configured correctly.", sender: 'bot', timestamp: new Date() }])
       toast.error('Connection failed')
     } finally { setIsTyping(false) }
   }

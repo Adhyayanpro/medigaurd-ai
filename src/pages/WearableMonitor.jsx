@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
 import { Activity, Heart, Thermometer, Wind, Droplet, Zap, AlertTriangle, Wifi, WifiOff, X, Loader } from 'lucide-react'
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip } from 'recharts'
+import toast from 'react-hot-toast'
+import { API_BASE_URL } from '../services/api'
 
 const generateVital = (base, variance, min, max) => {
   const val = base + (Math.random() - 0.5) * variance * 2
@@ -59,7 +61,7 @@ const WearableMonitor = () => {
       }))
 
       // Send to ML backend for real anomaly detection
-      fetch('http://localhost:5000/api/analyze-vitals', {
+      fetch(`${API_BASE_URL}/analyze-vitals`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newVitals)
